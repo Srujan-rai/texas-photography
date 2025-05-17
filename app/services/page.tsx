@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
@@ -470,8 +470,8 @@ export default function ServicesPage() {
                 {
                   number: "04",
                   title: "Post-Production",
-                  description:\
-                    "Our editors and colorists work their magic, carefully selecting the best shots, applying color grading, and crafting the narrative flow to create a cohesive and impactful final product that exceeds your expectations.roduct that exceeds your expectations.
+                  description:
+                    "Our editors and colorists work their magic, carefully selecting the best shots, applying color grading, and crafting the narrative flow to create a cohesive and impactful final product that exceeds your expectations.roduct that exceeds your expectations."
                 },
                 {
                   number: "05",
@@ -505,7 +505,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
       <section className="relative py-16 sm:py-20 md:py-24">
         <DynamicBackground intensity={0.2} />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-background/95 to-background/90" />
