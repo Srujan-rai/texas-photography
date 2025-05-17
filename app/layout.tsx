@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata = {
   title: "Texas Cinematography",
   description: "Capturing the soul of the Lone Star State through cinematic vision",
-    generator: 'v0.dev'
+    generator: 'srujan'
 }
 
 export default function RootLayout({
