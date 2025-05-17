@@ -1,0 +1,412 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%; /* Pure black background */
+    --background-rgb: 0, 0, 0;
+    --foreground: 0 0% 98%;
+    --foreground-rgb: 250, 250, 250;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.5rem;
+
+    /* Custom variables */
+    --header-bg: rgba(0, 0, 0, 0.8);
+    --border-opacity: 0.1;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --background-rgb: 255, 255, 255;
+    --foreground: 240 10% 3.9%;
+    --foreground-rgb: 10, 10, 10;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+
+    /* Custom variables */
+    --header-bg: rgba(255, 255, 255, 0.8);
+    --border-opacity: 0.1;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  .font-serif {
+    font-family: var(--font-playfair);
+  }
+  .font-sans {
+    font-family: var(--font-inter);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-foreground/5;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded bg-foreground/20;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-foreground/30;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Improved smooth scrolling */
+body {
+  overflow-y: scroll; /* Always show vertical scrollbar to prevent layout shifts */
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(to right, #a855f7, #ec4899, #ef4444);
+}
+
+/* Cinematic aspect ratios */
+.aspect-cinematic {
+  aspect-ratio: 2.35 / 1;
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glass morphism */
+.glass {
+  @apply bg-foreground/5 backdrop-blur-md border border-foreground/10;
+}
+
+/* Premium shadows */
+.premium-shadow {
+  box-shadow: 0 10px 30px -5px rgba(var(--foreground-rgb), 0.1);
+}
+
+/* Cinematic text */
+.cinematic-text {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Lens flare effect */
+.lens-flare {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Cinematic button hover */
+.btn-cinematic {
+  @apply relative overflow-hidden transition-all duration-300;
+}
+
+.btn-cinematic::after {
+  content: "";
+  @apply absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 opacity-0 transition-opacity duration-300;
+  z-index: -1;
+}
+
+.btn-cinematic:hover::after {
+  @apply opacity-100;
+}
+
+/* Animated underline */
+.animated-underline {
+  @apply relative;
+}
+
+.animated-underline::after {
+  content: "";
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-foreground transition-all duration-300;
+}
+
+.animated-underline:hover::after {
+  @apply w-full;
+}
+
+/* Cinematic transitions */
+.fade-in {
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 1s ease forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Parallax scroll effect */
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+/* Smooth section transitions */
+.section-transition {
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Cinematic hover effects */
+.cinematic-hover {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cinematic-hover:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Dramatic text shadow for headings */
+.dramatic-text {
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Cinematic glow effect */
+.cinematic-glow {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+/* Reveal animation for sections */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cinematic image treatment */
+.cinematic-image {
+  filter: contrast(1.1) saturate(1.1);
+  transition: filter 0.5s ease;
+}
+
+.cinematic-image:hover {
+  filter: contrast(1.2) saturate(1.2) brightness(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .dramatic-text {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .cinematic-hover:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+}
+
+/* Scroll-triggered animations */
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Text reveal animation */
+.text-reveal-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.text-reveal-char.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation for multiple elements */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.stagger-container.visible .stagger-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stagger-container.visible .stagger-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.stagger-container.visible .stagger-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.stagger-container.visible .stagger-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.stagger-container.visible .stagger-item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+.stagger-container.visible .stagger-item:nth-child(5) {
+  transition-delay: 0.5s;
+}
+.stagger-container.visible .stagger-item:nth-child(6) {
+  transition-delay: 0.6s;
+}
+
+/* Scroll progress indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #8b5cf6, #ec4899, #ef4444);
+  transform-origin: 0%;
+  z-index: 100;
+}
+
+/* Parallax image effect */
+.parallax-image {
+  overflow: hidden;
+}
+
+.parallax-image img {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+/* Floating animation */
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating {
+  animation: floating 5s ease-in-out infinite;
+}
+
+/* Text gradient animation */
+@keyframes textGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-text {
+  background: linear-gradient(90deg, #8b5cf6, #ec4899, #ef4444, #8b5cf6);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradient 8s ease infinite;
+}
