@@ -32,6 +32,7 @@ export function SiteHeader() {
     { label: "About", href: "/about" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Gallery", href: "/gallery" },
+    { label: "Food", href: "/food-photography" },
     { label: "Services", href: "/services" },
     { label: "Contact", href: "/contact" },
   ]
@@ -46,14 +47,14 @@ export function SiteHeader() {
       initial={{ borderOpacity: 0 }}
       animate={{ borderOpacity: scrollY.get() > 50 ? 0.1 : 0 }}
     >
-      <div className="container flex h-20 items-center justify-between px-4 md:px-6">
+      <div className="container flex h-16 sm:h-20 items-center justify-between px-3 md:px-6">
         <Link href="/" className="flex items-center">
-          <div className="relative h-10 w-40 sm:w-48 bg-black rounded-md overflow-hidden">
+          <div className="relative h-8 sm:h-10 w-32 sm:w-40 md:w-48 overflow-hidden">
             <Image
               src="/images/texas-logo.png"
-              alt="Texas Cinematography"
+              alt="Dheeran cinematics"
               fill
-              className="object-contain mix-blend-screen"
+              className="object-contain mix-blend-difference"
               priority
             />
           </div>
@@ -81,7 +82,7 @@ export function SiteHeader() {
             <Button
               variant="outline"
               size="icon"
-              className="border-foreground/20 bg-background/20 text-foreground backdrop-blur-sm"
+              className="h-9 w-9 border-foreground/20 bg-background/20 text-foreground backdrop-blur-sm"
             >
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
@@ -89,12 +90,12 @@ export function SiteHeader() {
           </SheetTrigger>
           <SheetContent side="right" className="border-foreground/10 bg-background/95 backdrop-blur-md">
             <div className="flex flex-col space-y-6 pt-6">
-              <div className="mx-auto relative h-10 w-40 bg-black rounded-md overflow-hidden">
+              <div className="mx-auto relative h-10 w-40 overflow-hidden">
                 <Image
                   src="/images/texas-logo.png"
-                  alt="Texas Cinematography"
+                  alt="Dheeran cinematics"
                   fill
-                  className="object-contain mix-blend-screen"
+                  className="object-contain mix-blend-difference"
                 />
               </div>
               <div className="mt-6">
@@ -113,9 +114,9 @@ export function SiteHeader() {
                 ))}
                 <div className="mt-6 flex items-center space-x-4">
                   <ThemeToggle />
-                  <Link href="/contact">
+                  <Link href="/contact" className="flex-1">
                     <Button
-                      className="bg-foreground text-background hover:bg-foreground/90"
+                      className="w-full bg-foreground text-background hover:bg-foreground/90"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Book Now

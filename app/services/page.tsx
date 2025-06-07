@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
@@ -27,7 +27,6 @@ const services = [
       "Digital delivery and optional physical media",
     ],
     image: "/images/wedding-moment.png",
-    price: "Starting at $3,500",
   },
   {
     id: "commercial",
@@ -43,7 +42,6 @@ const services = [
       "Full commercial usage rights",
     ],
     image: "/images/kaif-portrait.png",
-    price: "Starting at $2,000",
   },
   {
     id: "documentary",
@@ -59,7 +57,6 @@ const services = [
       "Festival submission preparation",
     ],
     image: "/images/haldi-ceremony.png",
-    price: "Starting at $5,000",
   },
   {
     id: "portrait",
@@ -75,7 +72,6 @@ const services = [
       "Digital gallery and print options",
     ],
     image: "/images/yellow-portrait.png",
-    price: "Starting at $500",
   },
   {
     id: "aerial",
@@ -91,7 +87,6 @@ const services = [
       "Post-production and color grading",
     ],
     image: "/images/mattu-beach.png",
-    price: "Starting at $800",
   },
   {
     id: "events",
@@ -107,7 +102,21 @@ const services = [
       "Quick turnaround for social media",
     ],
     image: "/images/beach-couple.png",
-    price: "Starting at $1,500",
+  },
+  {
+    id: "food",
+    title: "Food Photography",
+    description:
+      "Specialized culinary photography that showcases dishes in their most appetizing and visually stunning presentation.",
+    features: [
+      "Professional food styling and composition",
+      "Custom lighting setups for each dish",
+      "Menu and editorial photography",
+      "Social media content creation",
+      "Commercial and advertising shoots",
+      "Same-day delivery options available",
+    ],
+    image: "/images/food-tiramisu-dome.jpeg",
   },
 ]
 
@@ -244,7 +253,6 @@ export default function ServicesPage() {
                   <div className="p-6 flex flex-col flex-grow">
                     <h3 className="mb-2 font-serif text-xl font-bold">{service.title}</h3>
                     <p className="mb-4 text-sm text-muted-foreground flex-grow">{service.description}</p>
-                    <p className="mb-4 text-sm font-medium">{service.price}</p>
                     <Link href={`/services#${service.id}`}>
                       <Button
                         variant="outline"
@@ -320,7 +328,6 @@ export default function ServicesPage() {
                     <h3 className="mb-2 font-serif text-2xl sm:text-3xl font-bold tracking-tight dramatic-text">
                       {service.title}
                     </h3>
-                    <p className="mb-4 text-sm text-foreground/70">{service.price}</p>
                     <p className="mb-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
                       {service.description}
                     </p>
@@ -355,75 +362,6 @@ export default function ServicesPage() {
                 </div>
               </div>
             ))}
-        </div>
-      </section>
-
-      {/* Pricing Packages */}
-      <section className="relative py-16 sm:py-20 md:py-24">
-        <DynamicBackground intensity={0.2} />
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-background/95 to-background/90" />
-        <div className="container relative z-10 px-4">
-          <FadeIn className="mb-10 sm:mb-16 text-center">
-            <TextReveal
-              text="Pricing Packages"
-              className="mb-3 sm:mb-4 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight dramatic-text"
-            />
-            <p className="mx-auto max-w-xs sm:max-w-md md:max-w-3xl text-base sm:text-lg text-muted-foreground">
-              Flexible options tailored to your project needs and budget
-            </p>
-          </FadeIn>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {packages.map((pkg, index) => (
-              <FadeIn key={index} delay={index * 0.1} direction="up">
-                <motion.div
-                  whileHover={{ y: -10 }}
-                  className={cn(
-                    "group relative overflow-hidden rounded-xl border backdrop-blur-sm transition-colors duration-300 shadow-lg cinematic-hover h-full flex flex-col",
-                    pkg.popular
-                      ? "border-foreground/20 bg-foreground/10 hover:bg-foreground/15"
-                      : "border-foreground/10 bg-foreground/5 hover:bg-foreground/10",
-                  )}
-                >
-                  {pkg.popular && (
-                    <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-4 py-1 rounded-bl-lg">
-                      Most Popular
-                    </div>
-                  )}
-                  <div className="p-6 sm:p-8 flex flex-col flex-grow">
-                    <h3 className="mb-2 font-serif text-xl sm:text-2xl font-bold">{pkg.title}</h3>
-                    <p className="mb-4 text-sm text-muted-foreground">{pkg.description}</p>
-                    <div className="mb-6">
-                      <span className="font-serif text-3xl sm:text-4xl font-bold">{pkg.price}</span>
-                    </div>
-                    <div className="space-y-2 mb-6 flex-grow">
-                      <h4 className="font-medium mb-2">What's Included:</h4>
-                      <ul className="space-y-2">
-                        {pkg.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-start">
-                            <Check className="mr-2 h-5 w-5 text-foreground/60 flex-shrink-0 mt-0.5" />
-                            <span className="text-sm text-muted-foreground">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <Link href="/contact">
-                      <Button
-                        className={cn(
-                          "w-full",
-                          pkg.popular
-                            ? "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white hover:from-purple-600 hover:via-pink-600 hover:to-red-600"
-                            : "bg-foreground text-background hover:bg-foreground/90",
-                        )}
-                      >
-                        Get Started
-                      </Button>
-                    </Link>
-                  </div>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -471,7 +409,7 @@ export default function ServicesPage() {
                   number: "04",
                   title: "Post-Production",
                   description:
-                    "Our editors and colorists work their magic, carefully selecting the best shots, applying color grading, and crafting the narrative flow to create a cohesive and impactful final product that exceeds your expectations.roduct that exceeds your expectations."
+                    "Our editors and colorists work their magic, carefully selecting the best shots, applying color grading, and crafting the narrative flow to create a cohesive and impactful final product that exceeds your expectations.",
                 },
                 {
                   number: "05",
@@ -505,6 +443,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
       <section className="relative py-16 sm:py-20 md:py-24">
         <DynamicBackground intensity={0.2} />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-background/95 to-background/90" />
@@ -567,7 +506,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="relative py-16 sm:py-20 md:py-24">
+      <section className="relative py-16 sm:py-20 md:py-20">
         <DynamicBackground intensity={0.3} />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/90 via-background/95 to-background" />
         <div className="container relative z-10 px-4 text-center">

@@ -43,13 +43,20 @@ export function ParallaxSection({ children, speed = 0.5, direction = "up", class
   }, [direction, speed])
 
   const transform = useTransform(scrollYProgress, [0, 1], [transformRange.current.start, transformRange.current.end])
-  const springTransform = useSpring(transform, { stiffness: 100, damping: 30 })
+
+  // Optimize spring animation for smoother parallax
+  const springTransform = useSpring(transform, {
+    stiffness: 50, // Lower stiffness for smoother movement
+    damping: 20, // Lower damping for smoother movement
+    mass: 0.5, // Lower mass for more responsive movement
+  })
 
   return (
     <div ref={ref} className={`relative overflow-hidden ${className}`}>
       <motion.div
         style={{
           [direction === "left" || direction === "right" ? "x" : "y"]: springTransform,
+          willChange: "transform", // Hint to browser to optimize
         }}
       >
         {children}
@@ -125,6 +132,7 @@ export function FadeIn({
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         transition={{ duration, delay }}
+        style={{ willChange: "transform, opacity" }} // Optimize rendering
       >
         {children}
       </motion.div>
@@ -158,6 +166,7 @@ export function ZoomIn({
         initial={{ opacity: 0, scale }}
         animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale }}
         transition={{ duration, delay, ease: "easeOut" }}
+        style={{ willChange: "transform, opacity" }} // Optimize rendering
       >
         {children}
       </motion.div>
@@ -173,7 +182,13 @@ interface ScrollProgressProps {
 
 export function ScrollProgress({ color = "#8B5CF6", height = 4, zIndex = 100 }: ScrollProgressProps) {
   const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
+
+  // Optimize spring animation for smoother progress bar
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 50,
+    damping: 15,
+    restDelta: 0.001,
+  })
 
   return (
     <motion.div
@@ -184,6 +199,7 @@ export function ScrollProgress({ color = "#8B5CF6", height = 4, zIndex = 100 }: 
         height,
         background: color,
         zIndex,
+        willChange: "transform", // Optimize rendering
       }}
     />
   )
@@ -233,9 +249,15 @@ export function TextReveal({
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         className="inline-flex flex-wrap"
+        style={{ willChange: "opacity" }} // Optimize rendering
       >
         {words.map((word, index) => (
-          <motion.span key={index} variants={child} className="mr-1 inline-block">
+          <motion.span
+            key={index}
+            variants={child}
+            className="mr-1 inline-block"
+            style={{ willChange: "transform, opacity" }} // Optimize rendering
+          >
             {word}
           </motion.span>
         ))}
@@ -262,7 +284,9 @@ export function FloatingElement({ children, amplitude = 10, frequency = 4, class
         duration: frequency,
         repeat: Number.POSITIVE_INFINITY,
         ease: "easeInOut",
+        times: [0, 0.5, 1], // Optimize animation keyframes
       }}
+      style={{ willChange: "transform" }} // Optimize rendering
     >
       {children}
     </motion.div>

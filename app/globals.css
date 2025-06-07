@@ -68,12 +68,37 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+
+    /* Optimize rendering */
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   .font-serif {
     font-family: var(--font-playfair);
   }
   .font-sans {
     font-family: var(--font-inter);
+  }
+
+  /* Optimize images */
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Optimize animations */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -94,7 +119,7 @@
   @apply bg-foreground/30;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling - fallback for when JS is disabled */
 html {
   scroll-behavior: smooth;
   overflow-x: hidden; /* Prevent horizontal scroll */
@@ -104,6 +129,12 @@ html {
 body {
   overflow-y: scroll; /* Always show vertical scrollbar to prevent layout shifts */
   transition: background-color 0.5s ease, color 0.5s ease;
+
+  /* Optimize rendering performance */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Gradient text */
@@ -409,4 +440,104 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textGradient 8s ease infinite;
+}
+
+/* Add these responsive typography classes to the end of your globals.css file */
+
+/* Responsive typography */
+@layer utilities {
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm;
+  }
+
+  .text-responsive-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-responsive-base {
+    @apply text-base sm:text-lg;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  /* Responsive spacing */
+  .p-responsive {
+    @apply p-3 sm:p-4 md:p-6;
+  }
+
+  .px-responsive {
+    @apply px-3 sm:px-4 md:px-6;
+  }
+
+  .py-responsive {
+    @apply py-3 sm:py-4 md:py-6;
+  }
+
+  .m-responsive {
+    @apply m-3 sm:m-4 md:m-6;
+  }
+
+  .mx-responsive {
+    @apply mx-3 sm:mx-4 md:mx-6;
+  }
+
+  .my-responsive {
+    @apply my-3 sm:my-4 md:my-6;
+  }
+
+  .gap-responsive {
+    @apply gap-3 sm:gap-4 md:gap-6;
+  }
+
+  /* Responsive containers */
+  .container-responsive {
+    @apply px-3 sm:px-4 md:px-6 mx-auto;
+  }
+}
+
+/* Improve mobile tap targets */
+@media (max-width: 640px) {
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Ensure proper spacing between interactive elements */
+  .space-y-mobile > * + * {
+    margin-top: 0.75rem;
+  }
+}
+
+/* Optimize font sizes for mobile */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.75rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+  }
+
+  p,
+  li,
+  a {
+    font-size: 0.9375rem !important;
+  }
 }

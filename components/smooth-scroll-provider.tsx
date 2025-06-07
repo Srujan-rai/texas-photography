@@ -10,39 +10,44 @@ interface SmoothScrollProviderProps {
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const contentRef = useRef<HTMLDivElement>(null)
   const scrollerRef = useRef<HTMLDivElement>(null)
-  const [isEnabled, setIsEnabled] = useState(true)
+  const [isReady, setIsReady] = useState(false)
   const pathname = usePathname()
 
-  // Disable smooth scrolling on problematic pages
+  // Reset scroll position on page change
   useEffect(() => {
-    // Check if current page is causing issues
-    if (pathname === "/portfolio") {
-      setIsEnabled(false)
-    } else {
-      setIsEnabled(true)
-    }
+    window.scrollTo(0, 0)
+
+    // Small delay to ensure DOM is ready after navigation
+    const timer = setTimeout(() => {
+      setIsReady(true)
+    }, 200)
+
+    return () => clearTimeout(timer)
   }, [pathname])
 
-  // Set up smooth scrolling
+  // Set up smooth scrolling with optimized performance
   useEffect(() => {
-    if (!contentRef.current || !scrollerRef.current || !isEnabled) return
+    if (!contentRef.current || !scrollerRef.current || !isReady) return
 
     const content = contentRef.current
     const scroller = scrollerRef.current
 
     // Set initial height
-    scroller.style.height = `${content.scrollHeight}px`
+    const updateHeight = () => {
+      scroller.style.height = `${content.scrollHeight}px`
+    }
 
-    // Update height on resize with debounce
+    updateHeight()
+
+    // Optimize ResizeObserver with throttling
     let resizeTimeout: NodeJS.Timeout
-    let animationFrame: number
-
     const resizeObserver = new ResizeObserver(() => {
-      // Debounce resize updates to prevent loops
-      clearTimeout(resizeTimeout)
+      if (resizeTimeout) return
+
       resizeTimeout = setTimeout(() => {
-        scroller.style.height = `${content.scrollHeight}px`
-      }, 100)
+        updateHeight()
+        resizeTimeout = undefined as unknown as NodeJS.Timeout
+      }, 250) // Increased timeout for less frequent updates
     })
 
     try {
@@ -51,41 +56,60 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       console.error("ResizeObserver error:", error)
     }
 
-    // Smooth scroll animation
+    // Optimized smooth scroll animation
+    let rafId: number
     let lastScrollY = window.scrollY
     let currentScrollY = window.scrollY
-    let ticking = false
+
+    // Optimized lerp function with configurable smoothness
+    const smoothness = 0.12 // Higher value = smoother scrolling (0.08-0.15 is a good range)
 
     const lerp = (start: number, end: number, factor: number) => {
       return start + (end - start) * factor
     }
 
-    const updateScroll = () => {
-      currentScrollY = lerp(currentScrollY, window.scrollY, 0.05) // Smoother factor
+    // Use timestamp-based animation for consistent performance
+    let lastTime = performance.now()
 
-      if (Math.abs(currentScrollY - lastScrollY) > 0.05) {
-        content.style.transform = `translateY(${-currentScrollY}px)`
+    const updateScroll = (time: number) => {
+      // Calculate delta time for consistent animation regardless of frame rate
+      const deltaTime = Math.min(time - lastTime, 50) / 16.67 // Cap at 50ms, normalize to 60fps
+      lastTime = time
+
+      // Get current scroll position
+      const targetScrollY = window.scrollY
+
+      // Apply smoothing with time-based adjustment
+      currentScrollY = lerp(currentScrollY, targetScrollY, smoothness * deltaTime)
+
+      // Only update DOM when there's a noticeable change and not too frequently
+      if (Math.abs(currentScrollY - lastScrollY) > 0.5) {
+        content.style.transform = `translate3D(0, ${-Math.round(currentScrollY)}px, 0)`
         lastScrollY = currentScrollY
       }
 
-      ticking = false
-      animationFrame = requestAnimationFrame(updateScroll)
+      rafId = requestAnimationFrame(updateScroll)
     }
 
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true
-        animationFrame = requestAnimationFrame(updateScroll)
-      }
+    // Start the animation
+    rafId = requestAnimationFrame(updateScroll)
+
+    // Handle window resize
+    const handleResize = () => {
+      updateHeight()
+      // Reset scroll position to avoid jumps
+      currentScrollY = window.scrollY
+      lastScrollY = window.scrollY
+      content.style.transform = `translate3D(0, ${-currentScrollY}px, 0)`
     }
 
-    window.addEventListener("scroll", onScroll, { passive: true })
-    animationFrame = requestAnimationFrame(updateScroll)
+    window.addEventListener("resize", handleResize, { passive: true })
 
+    // Cleanup
     return () => {
-      window.removeEventListener("scroll", onScroll)
-      clearTimeout(resizeTimeout)
-      cancelAnimationFrame(animationFrame)
+      if (rafId) cancelAnimationFrame(rafId)
+      if (resizeTimeout) clearTimeout(resizeTimeout)
+      window.removeEventListener("resize", handleResize)
 
       try {
         resizeObserver.disconnect()
@@ -93,12 +117,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
         console.error("ResizeObserver disconnect error:", error)
       }
     }
-  }, [isEnabled, pathname])
-
-  if (!isEnabled) {
-    // If smooth scrolling is disabled, just render children directly
-    return <>{children}</>
-  }
+  }, [isReady, pathname])
 
   return (
     <>
@@ -111,6 +130,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
           left: 0,
           width: "100%",
           willChange: "transform",
+          transform: "translate3D(0, 0, 0)", // Use translate3D for hardware acceleration
+          backfaceVisibility: "hidden", // Prevent flickering in some browsers
         }}
       >
         {children}

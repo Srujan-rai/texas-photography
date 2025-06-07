@@ -46,9 +46,9 @@ export default function AboutPage() {
     },
     {
       year: "2020",
-      title: "Texas Cinematography",
-      description: "Founded Texas Cinematography studio, bringing together a team of visual storytellers.",
-      image: "/images/yellow-portrait.png",
+      title: "Dheeran cinematics",
+      description: "Founded Dheeran cinematics studio, bringing together a team of visual storytellers.",
+      image: "/images/kaif-portrait.png",
     },
     {
       year: "2023",
@@ -118,7 +118,7 @@ export default function AboutPage() {
               Our Story
             </h1>
             <p className="mx-auto max-w-2xl text-base sm:text-lg md:text-xl text-foreground/80">
-              Discover the passion, vision, and journey behind Texas Cinematography and the team dedicated to visual
+              Discover the passion, vision, and journey behind Dheeran cinematics and the team dedicated to visual
               storytelling.
             </p>
           </motion.div>
@@ -152,7 +152,7 @@ export default function AboutPage() {
               <div className="space-y-4 sm:space-y-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
                 <FadeIn delay={0.1}>
                   <p>
-                    At Texas Cinematography, our mission is to capture the authentic spirit and diverse beauty of Texas
+                    At Dheeran cinematics, our mission is to capture the authentic spirit and diverse beauty of Texas
                     through a cinematic lens. We believe that every moment, landscape, and story deserves to be
                     preserved with artistic integrity and technical excellence.
                   </p>
@@ -259,7 +259,7 @@ export default function AboutPage() {
               className="mb-3 sm:mb-4 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight dramatic-text"
             />
             <p className="mx-auto max-w-xs sm:max-w-md md:max-w-3xl text-base sm:text-lg text-muted-foreground">
-              The evolution of Texas Cinematography through the years
+              The evolution of Dheeran cinematics through the years
             </p>
           </FadeIn>
 
@@ -327,7 +327,7 @@ export default function AboutPage() {
               className="mb-3 sm:mb-4 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight dramatic-text"
             />
             <p className="mx-auto max-w-xs sm:max-w-md md:max-w-3xl text-base sm:text-lg text-muted-foreground">
-              The talented individuals behind Texas Cinematography
+              The talented individuals behind Dheeran cinematics
             </p>
           </FadeIn>
 
@@ -361,7 +361,7 @@ export default function AboutPage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="relative py-16 sm:py-20 md:py-24">
+      <section className="relative py-16 sm:py-20 md:py-20">
         <DynamicBackground intensity={0.3} />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/90 via-background/95 to-background" />
         <div className="container relative z-10 px-4 text-center">

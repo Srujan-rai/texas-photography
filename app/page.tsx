@@ -39,6 +39,28 @@ export default function Home() {
     setIsLoaded(true)
   }, [])
 
+  // Add this after the existing useEffect
+  useEffect(() => {
+    const handleScroll = () => {
+      const reveals = document.querySelectorAll(".reveal")
+
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight
+        const elementTop = reveals[i].getBoundingClientRect().top
+        const elementVisible = 150
+
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active")
+        }
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    handleScroll() // Call once on mount to check initial elements
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   const scrollToPortfolio = () => {
     if (portfolioRef.current) {
       portfolioRef.current.scrollIntoView({ behavior: "smooth" })
@@ -48,36 +70,56 @@ export default function Home() {
   // Portfolio projects data with real images
   const portfolioProjects = [
     {
+      id: 1,
       title: "Wedding Stories",
       category: "Wedding",
       description: "Capturing the most beautiful moments of your special day",
       image: "/images/wedding-moment.png",
     },
     {
+      id: 2,
       title: "Portrait Sessions",
       category: "Portrait",
       description: "Professional portraits that reveal your authentic self",
       image: "/images/white-dress.png",
     },
     {
+      id: 3,
       title: "Coastal Dreams",
       category: "Landscape",
       description: "Breathtaking views of coastal landscapes",
       image: "/images/mattu-beach.png",
     },
     {
+      id: 4,
+      title: "Culinary Artistry",
+      category: "Food",
+      description: "Showcasing dishes in their most appetizing presentation",
+      image: "/images/food-tiramisu-dome.jpeg",
+    },
+    {
+      id: 5,
+      title: "Gourmet Creations",
+      category: "Food",
+      description: "Elevating food presentation through cinematic photography",
+      image: "/images/food-gourmet-salad.jpeg",
+    },
+    {
+      id: 6,
       title: "Cultural Ceremonies",
       category: "Documentary",
       description: "Authentic documentation of cultural traditions and ceremonies",
       image: "/images/haldi-ceremony.png",
     },
     {
+      id: 7,
       title: "Engagement Sessions",
       category: "Couples",
       description: "Romantic moments between couples in beautiful settings",
       image: "/images/beach-couple.png",
     },
     {
+      id: 8,
       title: "Fashion Photography",
       category: "Fashion",
       description: "Stylish portraits that showcase personality and fashion",
@@ -87,14 +129,16 @@ export default function Home() {
 
   // Gallery images data
   const galleryImages = [
-    { aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/camera-hands.png" },
-    { aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/kaif-portrait.png" },
-    { aspect: "aspect-[1/2]", span: "md:col-span-1 md:row-span-2", image: "/images/umbrella-portrait.png" },
-    { aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/yellow-portrait.png" },
-    { aspect: "aspect-[2/1]", span: "col-span-2 md:col-span-2 md:row-span-1", image: "/images/mattu-beach.png" },
-    { aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/bride-closeup.png" },
-    { aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/beach-couple.png" },
-    { aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/haldi-ceremony.png" },
+    { id: 9, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/camera-hands.png" },
+    { id: 2, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/kaif-portrait.png" },
+    { id: 4, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/food-pizza.jpeg" },
+    { id: 8, aspect: "aspect-[1/2]", span: "md:col-span-1 md:row-span-2", image: "/images/umbrella-portrait.png" },
+    { id: 10, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/yellow-portrait.png" },
+    { id: 3, aspect: "aspect-[2/1]", span: "col-span-2 md:col-span-2 md:row-span-1", image: "/images/mattu-beach.png" },
+    { id: 11, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/bride-closeup.png" },
+    { id: 12, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/food-appetizers.jpeg" },
+    { id: 7, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/beach-couple.png" },
+    { id: 6, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/haldi-ceremony.png" },
   ]
 
   return (
@@ -118,19 +162,19 @@ export default function Home() {
           style={{ opacity }}
           className="relative z-20 flex h-full w-full flex-col items-center justify-center px-4 text-center"
         >
-          <FloatingElement amplitude={15} frequency={6} className="mb-6">
+          <FloatingElement amplitude={15} frequency={6} className="mb-4 sm:mb-6">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1.5, type: "spring" }}
               className="flex items-center justify-center"
             >
-              <div className="relative h-32 w-64 sm:h-40 sm:w-80  rounded-md overflow-hidden ">
+              <div className="relative h-24 w-48 sm:h-32 sm:w-64 md:h-40 md:w-80 overflow-hidden">
                 <Image
                   src="/images/texas-logo.png"
-                  alt="Texas Cinematography"
+                  alt="Dheeran cinematics"
                   fill
-                  className="object-contain mix-blend-screen"
+                  className="object-contain mix-blend-difference"
                   priority
                 />
               </div>
@@ -141,7 +185,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="mb-6 sm:mb-8 max-w-xs sm:max-w-md md:max-w-2xl text-base sm:text-lg md:text-xl lg:text-2xl font-light text-foreground/80"
+            className="mb-6 sm:mb-8 max-w-xs sm:max-w-md md:max-w-2xl text-sm sm:text-base md:text-lg lg:text-xl font-light text-foreground/80"
           >
             Capturing the soul of the Lone Star State through cinematic vision
           </motion.p>
@@ -149,22 +193,22 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
+            className="flex flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0"
           >
             <Button
-              size="lg"
-              className="group bg-foreground text-background hover:bg-foreground/90 cinematic-hover"
+              size="sm"
+              className="group bg-foreground text-background hover:bg-foreground/90 cinematic-hover sm:size-lg"
               onClick={scrollToPortfolio}
             >
               Explore Our Work
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
-              size="lg"
+              size="sm"
               variant="outline"
-              className="border-foreground/30 bg-background/10 text-foreground backdrop-blur-md hover:bg-foreground/10 cinematic-hover"
+              className="border-foreground/30 bg-background/10 text-foreground backdrop-blur-md hover:bg-foreground/10 cinematic-hover sm:size-lg"
             >
-              <Play className="mr-2 h-4 w-4" /> Watch Showreel
+              <Play className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Watch Showreel
             </Button>
           </motion.div>
         </motion.div>
@@ -173,25 +217,25 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="flex h-12 w-8 items-start justify-center rounded-full border-2 border-foreground/30 p-2 bg-background/10 backdrop-blur-sm"
+            className="flex h-10 w-6 sm:h-12 sm:w-8 items-start justify-center rounded-full border-2 border-foreground/30 p-2 bg-background/10 backdrop-blur-sm"
           >
             <motion.div
               animate={{
-                y: [0, 12, 0],
+                y: [0, 8, 0],
               }}
               transition={{
                 duration: 1.5,
                 repeat: Number.POSITIVE_INFINITY,
                 repeatType: "loop",
               }}
-              className="h-2 w-2 rounded-full bg-foreground"
+              className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-foreground"
             />
           </motion.div>
         </div>
       </section>
 
       {/* Featured Work */}
-      <section ref={portfolioRef} className="relative py-16 sm:py-20 md:py-24 lg:py-32">
+      <section ref={portfolioRef} className="relative py-12 sm:py-16 md:py-20">
         <DynamicBackground />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-background/95 to-background/90" />
         <div className="container relative z-10 px-4 md:px-6">
@@ -206,7 +250,7 @@ export default function Home() {
           </FadeIn>
 
           <div className="grid gap-4 sm:gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {portfolioProjects.map((project, index) => (
+            {portfolioProjects.slice(0, 6).map((project, index) => (
               <FadeIn key={index} delay={index * 0.1} direction="up">
                 <motion.div
                   whileHover={{ y: -10 }}
@@ -229,13 +273,15 @@ export default function Home() {
                     <h3 className="mb-1 sm:mb-2 font-serif text-xl sm:text-2xl font-bold">{project.title}</h3>
                     <p className="mb-3 sm:mb-4 text-xs sm:text-sm text-foreground/80">{project.description}</p>
                     <div className="transform opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-foreground text-foreground hover:bg-foreground/10"
-                      >
-                        View Project
-                      </Button>
+                      <Link href={`/project/${project.id}`}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="border-foreground text-foreground hover:bg-foreground/10"
+                        >
+                          View Project
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>
@@ -259,7 +305,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32">
+      <section className="relative py-12 sm:py-16 md:py-20">
         <DynamicBackground intensity={0.3} />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/90 via-background/95 to-background" />
         <div className="container relative z-10 px-4 md:px-6">
@@ -267,7 +313,7 @@ export default function Home() {
             <ParallaxSection speed={0.3} direction="left">
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl shadow-2xl">
                 <Image
-                  src="/images/yellow-portrait.png"
+                  src="/images/kaif-portrait.png"
                   alt="Cinematographer portrait"
                   width={800}
                   height={1000}
@@ -282,16 +328,11 @@ export default function Home() {
                 <FloatingElement
                   amplitude={5}
                   frequency={5}
-                  className="absolute -bottom-2 -right-2 h-16 w-16 sm:h-24 sm:w-24 rounded-full border-8 border-background bg-foreground p-2 shadow-lg cinematic-glow"
+                  className="absolute -bottom-2 -right-2 h-16 w-16 sm:h-24 sm:w-24 rounded-full border-8 border-background p-2 shadow-lg cinematic-glow"
                 >
-                  <div className="flex h-full w-full items-center justify-center rounded-full ">
-                    <div className="relative h-full w-full p-2  rounded-full overflow-hidden">
-                      <Image
-                        src="/images/texas-logo.png"
-                        alt="Texas Cinematography"
-                        fill
-                        className="object-contain mix-blend-screen"
-                      />
+                  <div className="flex h-full w-full items-center justify-center rounded-full">
+                    <div className="relative h-full w-full p-2 overflow-hidden">
+                      <Image src="/images/texas-logo.png" alt="Dheeran cinematics" fill className="object-contain" />
                     </div>
                   </div>
                 </FloatingElement>
@@ -342,7 +383,7 @@ export default function Home() {
       </section>
 
       {/* Gallery Preview */}
-      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32">
+      <section className="relative py-12 sm:py-16 md:py-20">
         <DynamicBackground intensity={0.4} />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-background/95 to-background/90" />
         <div className="container relative z-10 px-4 md:px-6">
@@ -359,26 +400,28 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-4">
             {galleryImages.map((item, index) => (
               <ZoomIn key={index} delay={index * 0.05} scale={0.8}>
-                <div
-                  className={cn(
-                    "group relative overflow-hidden rounded-xl shadow-lg shadow-foreground/5 cinematic-hover",
-                    item.span,
-                    item.aspect,
-                  )}
-                >
-                  <Image
-                    src={item.image || "/placeholder.svg"}
-                    alt={`Gallery image ${index + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110 cinematic-image"
-                  />
-                  <div className="absolute inset-0 bg-background/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="rounded-full bg-foreground/20 p-2 sm:p-3 backdrop-blur-md">
-                      <ArrowRight className="h-4 w-4 sm:h-6 sm:w-6 text-foreground" />
+                <Link href={`/project/${item.id}`}>
+                  <div
+                    className={cn(
+                      "group relative overflow-hidden rounded-xl shadow-lg shadow-foreground/5 cinematic-hover",
+                      item.span,
+                      item.aspect,
+                    )}
+                  >
+                    <Image
+                      src={item.image || "/placeholder.svg"}
+                      alt={`Gallery image ${index + 1}`}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110 cinematic-image"
+                    />
+                    <div className="absolute inset-0 bg-background/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <div className="rounded-full bg-foreground/20 p-2 sm:p-3 backdrop-blur-md">
+                        <ArrowRight className="h-4 w-4 sm:h-6 sm:w-6 text-foreground" />
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </ZoomIn>
             ))}
           </div>
@@ -395,11 +438,11 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32">
+      <section className="relative py-12 sm:py-16 md:py-20">
         <DynamicBackground intensity={0.2} />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/90 via-background/95 to-background" />
         <div className="container relative z-10 px-4 md:px-6">
-          <FadeIn className="mb-10 sm:mb-16 text-center">
+          <FadeIn className="mb-8 sm:mb-12 text-center">
             <TextReveal
               text="Cinematography Services"
               className="mb-3 sm:mb-4 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight dramatic-text"
@@ -446,6 +489,12 @@ export default function Home() {
                 description: "Comprehensive visual strategy and artistic guidance for brands and creative projects.",
                 icon: "🎨",
               },
+              {
+                title: "Food Photography",
+                description:
+                  "Capturing culinary artistry with precision and style that makes dishes look as delicious as they taste.",
+                icon: "🍽️",
+              },
             ].map((service, index) => (
               <FadeIn key={index} delay={index * 0.1} direction="up">
                 <motion.div
@@ -469,266 +518,184 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 section-transition reveal">
-        <DynamicBackground intensity={0.3} />
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-background/95 to-background/90" />
-        <div className="container relative z-10 px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mb-10 sm:mb-16 text-center"
-          >
-            <h2 className="mb-3 sm:mb-4 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight dramatic-text">
-              Client Experiences
-            </h2>
-            <p className="mx-auto max-w-xs sm:max-w-md md:max-w-3xl text-base sm:text-lg text-muted-foreground">
-              Stories from those who have collaborated with Texas Cinematography
-            </p>
-          </motion.div>
-
-          <div className="grid gap-4 sm:gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                name: "Sarah Johnson",
-                role: "Film Producer",
-                testimonial:
-                  "The visual storytelling brought to our documentary exceeded all expectations. Every frame was thoughtfully composed, capturing the essence of Texas with remarkable authenticity.",
-              },
-              {
-                name: "Michael Rodriguez",
-                role: "Creative Director",
-                testimonial:
-                  "Our brand campaign was transformed through this cinematic vision. The images perfectly captured our ethos and have significantly elevated our visual identity in the market.",
-              },
-              {
-                name: "Emily Chen",
-                role: "Gallery Curator",
-                testimonial:
-                  "The fine art prints we commissioned have become the centerpiece of our exhibition. The technical mastery combined with artistic sensitivity creates truly transcendent work.",
-              },
-            ].map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="relative overflow-hidden rounded-xl border border-foreground/10 bg-foreground/5 p-6 sm:p-8 backdrop-blur-sm shadow-xl cinematic-hover"
-              >
-                <div className="absolute -right-4 -top-4 text-4xl sm:text-6xl opacity-10">❝</div>
-                <p className="mb-4 sm:mb-6 text-base sm:text-lg italic text-foreground/80">
-                  "{testimonial.testimonial}"
-                </p>
-                <div className="flex items-center space-x-4">
-                  <div className="relative h-10 w-10 sm:h-12 sm:w-12 overflow-hidden rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-[2px] shadow-md cinematic-glow">
-                    <div className="h-full w-full rounded-full bg-background">
-                      <div className="flex h-full w-full items-center justify-center rounded-full bg-foreground/10">
-                        <span className="font-serif text-lg font-bold">{testimonial.name[0]}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-bold">{testimonial.name}</h4>
-                    <p className="text-xs sm:text-sm text-muted-foreground">{testimonial.role}</p>
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Contact */}
-      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 section-transition reveal">
+      <section className="relative py-12 sm:py-16 md:py-20 section-transition reveal">
         <DynamicBackground intensity={0.2} />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background/90 via-background/95 to-background" />
         <div className="container relative z-10 px-4 md:px-6">
-          <div className="grid gap-8 sm:gap-12 md:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="mb-4 sm:mb-6 font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight dramatic-text">
-                Let's Create Together
-              </h2>
-              <p className="mb-6 sm:mb-8 text-base sm:text-lg text-muted-foreground">
-                Ready to bring your vision to life? Contact us to discuss your cinematography needs and start crafting
-                your visual story.
-              </p>
-              <div className="space-y-4 sm:space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="rounded-full bg-foreground/10 p-2 sm:p-3">
-                    <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Phone</h3>
-                    <p className="text-muted-foreground">(512) 555-0123</p>
-                    <p className="text-xs sm:text-sm text-muted-foreground/70">Available Monday-Friday, 9am-5pm CST</p>
-                  </div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="mb-4 sm:mb-6 font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight dramatic-text">
+              Let's Create Together
+            </h2>
+            <p className="mb-6 sm:mb-8 text-base sm:text-lg text-muted-foreground">
+              Ready to bring your vision to life? Contact us to discuss your cinematography needs and start crafting
+              your visual story.
+            </p>
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex items-start space-x-4">
+                <div className="rounded-full bg-foreground/10 p-2 sm:p-3">
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
-                <div className="flex items-start space-x-4">
-                  <div className="rounded-full bg-foreground/10 p-2 sm:p-3">
-                    <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Email</h3>
-                    <p className="text-muted-foreground">contact@texascinematography.com</p>
-                    <p className="text-xs sm:text-sm text-muted-foreground/70">We'll respond within 24 hours</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="rounded-full bg-foreground/10 p-2 sm:p-3">
-                    <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">Location</h3>
-                    <p className="text-muted-foreground">Austin, Texas</p>
-                    <p className="text-xs sm:text-sm text-muted-foreground/70">
-                      Available for travel throughout Texas and beyond
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="font-medium">Phone</h3>
+                  <p className="text-muted-foreground">(512) 555-0123</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground/70">Available Monday-Friday, 9am-5pm CST</p>
                 </div>
               </div>
-
-              <div className="mt-8 sm:mt-12">
-                <h3 className="mb-3 sm:mb-4 font-serif text-lg sm:text-xl font-bold">Follow Our Visual Journey</h3>
-                <div className="flex flex-wrap gap-2 sm:gap-4">
-                  {["Instagram", "Vimeo", "YouTube", "Behance"].map((platform, index) => (
-                    <motion.a
-                      key={index}
-                      href="#"
-                      whileHover={{ y: -5 }}
-                      className="rounded-full border border-foreground/20 bg-foreground/5 px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm backdrop-blur-sm transition-colors hover:bg-foreground/10 shadow-md cinematic-hover"
-                    >
-                      {platform}
-                    </motion.a>
-                  ))}
+              <div className="flex items-start space-x-4">
+                <div className="rounded-full bg-foreground/10 p-2 sm:p-3">
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
+                </div>
+                <div>
+                  <h3 className="font-medium">Email</h3>
+                  <p className="text-muted-foreground">contact@texascinematography.com</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground/70">We'll respond within 24 hours</p>
                 </div>
               </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="rounded-xl border border-foreground/10 bg-foreground/5 p-6 sm:p-8 backdrop-blur-sm shadow-2xl cinematic-hover"
-            >
-              <h3 className="mb-4 sm:mb-6 font-serif text-xl sm:text-2xl font-bold dramatic-text">
-                Start Your Project
-              </h3>
-              <form className="space-y-4 sm:space-y-6">
-                <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
-                  <div className="space-y-1 sm:space-y-2">
-                    <label htmlFor="first-name" className="text-xs sm:text-sm font-medium">
-                      First Name
-                    </label>
-                    <input
-                      id="first-name"
-                      className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
-                      placeholder="John"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-1 sm:space-y-2">
-                    <label htmlFor="last-name" className="text-xs sm:text-sm font-medium">
-                      Last Name
-                    </label>
-                    <input
-                      id="last-name"
-                      className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
-                      placeholder="Doe"
-                      required
-                    />
-                  </div>
+              <div className="flex items-start space-x-4">
+                <div className="rounded-full bg-foreground/10 p-2 sm:p-3">
+                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
+                <div>
+                  <h3 className="font-medium">Location</h3>
+                  <p className="text-muted-foreground">Austin, Texas</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground/70">
+                    Available for travel throughout Texas and beyond
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 sm:mt-12">
+              <h3 className="mb-3 sm:mb-4 font-serif text-lg sm:text-xl font-bold">Follow Our Visual Journey</h3>
+              <div className="flex flex-wrap gap-2 sm:gap-4">
+                {["Instagram", "Vimeo", "YouTube", "Behance"].map((platform, index) => (
+                  <motion.a
+                    key={index}
+                    href="#"
+                    whileHover={{ y: -5 }}
+                    className="rounded-full border border-foreground/20 bg-foreground/5 px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm backdrop-blur-sm transition-colors hover:bg-foreground/10 shadow-md cinematic-hover"
+                  >
+                    {platform}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="rounded-xl border border-foreground/10 bg-foreground/5 p-6 sm:p-8 backdrop-blur-sm shadow-2xl cinematic-hover"
+          >
+            <h3 className="mb-4 sm:mb-6 font-serif text-xl sm:text-2xl font-bold dramatic-text">Start Your Project</h3>
+            <form className="space-y-4 sm:space-y-6">
+              <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
                 <div className="space-y-1 sm:space-y-2">
-                  <label htmlFor="email" className="text-xs sm:text-sm font-medium">
-                    Email
+                  <label htmlFor="first-name" className="text-xs sm:text-sm font-medium">
+                    First Name
                   </label>
                   <input
-                    id="email"
-                    type="email"
+                    id="first-name"
                     className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
-                    placeholder="john.doe@example.com"
+                    placeholder="John"
                     required
                   />
                 </div>
                 <div className="space-y-1 sm:space-y-2">
-                  <label htmlFor="project-type" className="text-xs sm:text-sm font-medium">
-                    Project Type
+                  <label htmlFor="last-name" className="text-xs sm:text-sm font-medium">
+                    Last Name
                   </label>
-                  <select
-                    id="project-type"
+                  <input
+                    id="last-name"
                     className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
-                    required
-                  >
-                    <option value="" className="bg-background">
-                      Select project type
-                    </option>
-                    <option value="commercial" className="bg-background">
-                      Commercial
-                    </option>
-                    <option value="documentary" className="bg-background">
-                      Documentary
-                    </option>
-                    <option value="event" className="bg-background">
-                      Event Coverage
-                    </option>
-                    <option value="aerial" className="bg-background">
-                      Aerial Photography
-                    </option>
-                    <option value="fine-art" className="bg-background">
-                      Fine Art
-                    </option>
-                    <option value="other" className="bg-background">
-                      Other
-                    </option>
-                  </select>
-                </div>
-                <div className="space-y-1 sm:space-y-2">
-                  <label htmlFor="message" className="text-xs sm:text-sm font-medium">
-                    Project Details
-                  </label>
-                  <textarea
-                    id="message"
-                    className="h-24 sm:h-32 w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
-                    placeholder="Tell us about your vision..."
+                    placeholder="Doe"
                     required
                   />
                 </div>
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white hover:from-purple-600 hover:via-pink-600 hover:to-red-600 shadow-lg cinematic-hover"
+              </div>
+              <div className="space-y-1 sm:space-y-2">
+                <label htmlFor="email" className="text-xs sm:text-sm font-medium">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
+                  placeholder="john.doe@example.com"
+                  required
+                />
+              </div>
+              <div className="space-y-1 sm:space-y-2">
+                <label htmlFor="project-type" className="text-xs sm:text-sm font-medium">
+                  Project Type
+                </label>
+                <select
+                  id="project-type"
+                  className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
+                  required
                 >
-                  Submit Inquiry
-                </Button>
-              </form>
-            </motion.div>
-          </div>
+                  <option value="" className="bg-background">
+                    Select project type
+                  </option>
+                  <option value="commercial" className="bg-background">
+                    Commercial
+                  </option>
+                  <option value="documentary" className="bg-background">
+                    Documentary
+                  </option>
+                  <option value="event" className="bg-background">
+                    Event Coverage
+                  </option>
+                  <option value="aerial" className="bg-background">
+                    Aerial Photography
+                  </option>
+                  <option value="fine-art" className="bg-background">
+                    Fine Art
+                  </option>
+                  <option value="other" className="bg-background">
+                    Other
+                  </option>
+                </select>
+              </div>
+              <div className="space-y-1 sm:space-y-2">
+                <label htmlFor="message" className="text-xs sm:text-sm font-medium">
+                  Project Details
+                </label>
+                <textarea
+                  id="message"
+                  className="h-24 sm:h-32 w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
+                  placeholder="Tell us about your vision..."
+                  required
+                />
+              </div>
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white hover:from-purple-600 hover:via-pink-600 hover:to-red-600 shadow-lg cinematic-hover"
+              >
+                Submit Inquiry
+              </Button>
+            </form>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="relative border-t border-foreground/10 bg-background py-12 sm:py-16">
+      <footer className="relative border-t border-foreground/10 bg-background py-8 sm:py-12">
         <div className="container px-4 md:px-6">
           <div className="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="flex items-center mb-4">
-                <div className="relative h-12 w-40  rounded-md overflow-hidden">
-                  <Image
-                    src="/images/texas-logo.png"
-                    alt="Texas Cinematography"
-                    fill
-                    className="object-contain mix-blend-screen"
-                  />
+                <div className="relative h-12 w-40 overflow-hidden">
+                  <Image src="/images/texas-logo.png" alt="Dheeran cinematics" fill className="object-contain" />
                 </div>
               </div>
               <p className="text-sm sm:text-base text-muted-foreground">
@@ -797,7 +764,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-10 sm:mt-16 border-t border-foreground/10 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-muted-foreground/60">
-            <p>© {new Date().getFullYear()} Texas Cinematography. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Dheeran cinematics. All rights reserved.</p>
           </div>
         </div>
       </footer>
