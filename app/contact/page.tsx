@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, MapPin, Phone, Instagram, CheckCircle2, AlertCircle } from "lucide-react" // Added Instagram icon
+import { Mail, MapPin, Phone, Instagram, CheckCircle2, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { submitContactForm } from "../actions/contact-form"
 
@@ -14,11 +14,18 @@ export default function ContactPage() {
 
   async function handleSubmit(formData: FormData) {
     setIsSubmitting(true)
-    setFormStatus(null)
+    setFormStatus(null) // Clear previous status immediately on new submission attempt
 
     try {
       const result = await submitContactForm(formData)
       setFormStatus(result)
+
+      // Scroll to the form status message after submission
+      // Ensure the form status div has an ID for easy targeting
+      const formStatusElement = document.getElementById("form-status-message");
+      if (formStatusElement) {
+        formStatusElement.scrollIntoView({ behavior: "smooth", block: "center" }); // Scroll smoothly to the center
+      }
 
       // Reset form if successful
       if (result.success) {
@@ -30,6 +37,10 @@ export default function ContactPage() {
         success: false,
         message: "There was an error sending your message. Please try again later.",
       })
+      const formStatusElement = document.getElementById("form-status-message");
+      if (formStatusElement) {
+        formStatusElement.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -112,11 +123,14 @@ export default function ContactPage() {
 
           {formStatus && (
             <div
+              id="form-status-message" // Added ID for scrolling
               className={`mb-3 sm:mb-4 md:mb-6 p-2 sm:p-3 md:p-4 rounded-lg flex items-start gap-2 md:gap-3 text-xs sm:text-sm md:text-base ${
                 formStatus.success
                   ? "bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-400"
                   : "bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-400"
               }`}
+              role={formStatus.success ? "status" : "alert"} // Added for accessibility
+              aria-live="polite" // Added for accessibility
             >
               {formStatus.success ? (
                 <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0 mt-0.5" />
@@ -142,6 +156,7 @@ export default function ContactPage() {
                   className="flex h-8 sm:h-9 md:h-10 w-full rounded-md border border-input bg-background px-3 py-1 md:py-2 text-xs sm:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   placeholder="John"
                   required
+                  disabled={isSubmitting} // Added disabled prop
                 />
               </div>
               <div className="space-y-1 md:space-y-2">
@@ -157,6 +172,7 @@ export default function ContactPage() {
                   className="flex h-8 sm:h-9 md:h-10 w-full rounded-md border border-input bg-background px-3 py-1 md:py-2 text-xs sm:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   placeholder="Doe"
                   required
+                  disabled={isSubmitting} // Added disabled prop
                 />
               </div>
             </div>
@@ -174,6 +190,7 @@ export default function ContactPage() {
                 className="flex h-8 sm:h-9 md:h-10 w-full rounded-md border border-input bg-background px-3 py-1 md:py-2 text-xs sm:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="john.doe@example.com"
                 required
+                disabled={isSubmitting} // Added disabled prop
               />
             </div>
             <div className="space-y-1 md:space-y-2">
@@ -189,6 +206,7 @@ export default function ContactPage() {
                 type="tel"
                 className="flex h-8 sm:h-9 md:h-10 w-full rounded-md border border-input bg-background px-3 py-1 md:py-2 text-xs sm:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="(123) 456-7890"
+                disabled={isSubmitting} // Added disabled prop
               />
             </div>
             <div className="space-y-1 md:space-y-2">
@@ -203,6 +221,7 @@ export default function ContactPage() {
                 name="service"
                 className="flex h-8 sm:h-9 md:h-10 w-full rounded-md border border-input bg-background px-3 py-1 md:py-2 text-xs sm:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 required
+                disabled={isSubmitting} // Added disabled prop
               >
                 <option value="">Select a service</option>
                 <option value="portrait">Portrait Session</option>
@@ -227,6 +246,7 @@ export default function ContactPage() {
                 className="flex min-h-[80px] sm:min-h-[100px] md:min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-xs sm:text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Tell us about your project..."
                 required
+                disabled={isSubmitting} // Added disabled prop
               />
             </div>
             <Button type="submit" className="w-full h-8 sm:h-9 md:h-10 text-xs sm:text-sm" disabled={isSubmitting}>
