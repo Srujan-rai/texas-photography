@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, MapPin, Phone, CheckCircle2, AlertCircle } from "lucide-react"
+import { Mail, MapPin, Phone, Instagram, CheckCircle2, AlertCircle } from "lucide-react" // Added Instagram icon
 import { Button } from "@/components/ui/button"
 import { submitContactForm } from "../actions/contact-form"
 
@@ -42,7 +42,7 @@ export default function ContactPage() {
           Start Your Project
         </h1>
         <p className="mx-auto max-w-3xl text-xs sm:text-sm md:text-base text-muted-foreground">
-          Ready to capture your special moments? Get in touch to discuss your photography needs.
+          Ready to capture your special moments? Get in touch to discuss your photography and videography needs.
         </p>
       </div>
 
@@ -54,24 +54,41 @@ export default function ContactPage() {
               <Phone className="mt-1 h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
               <div>
                 <h3 className="text-sm md:text-base font-medium">Phone</h3>
-                <p className="text-sm md:text-base text-muted-foreground">(512) 555-0123</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Available Monday-Friday, 9am-5pm CST</p>
+                <p className="text-sm md:text-base text-muted-foreground">+91 77601 32092</p>
+                <p className="text-xs md:text-sm text-muted-foreground">Available Monday-Sunday, 9am-8pm IST</p>
               </div>
             </div>
             <div className="flex items-start space-x-2 sm:space-x-3 md:space-x-4">
               <Mail className="mt-1 h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
               <div>
                 <h3 className="text-sm md:text-base font-medium">Email</h3>
-                <p className="text-sm md:text-base text-muted-foreground">contact@texasphotography.com</p>
+                <p className="text-sm md:text-base text-muted-foreground">dmashlesh@gmail.com</p>
                 <p className="text-xs md:text-sm text-muted-foreground">We'll respond within 24 hours</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-2 sm:space-x-3 md:space-x-4">
+              <Instagram className="mt-1 h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
+              <div>
+                <h3 className="text-sm md:text-base font-medium">Instagram</h3>
+                <p className="text-sm md:text-base text-muted-foreground">
+                  <a
+                    href="https://www.instagram.com/dheeran_cinematics?igsh=NzcwYjJ3YjhvZTFj"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:no-underline"
+                  >
+                    @dheeran_cinematics
+                  </a>
+                </p>
+                <p className="text-xs md:text-sm text-muted-foreground">Connect with us on Instagram!</p>
               </div>
             </div>
             <div className="flex items-start space-x-2 sm:space-x-3 md:space-x-4">
               <MapPin className="mt-1 h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
               <div>
                 <h3 className="text-sm md:text-base font-medium">Location</h3>
-                <p className="text-sm md:text-base text-muted-foreground">Austin, Texas</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Available for travel throughout Texas</p>
+                <p className="text-sm md:text-base text-muted-foreground">Bengaluru, Karnataka, India</p>
+                <p className="text-xs md:text-sm text-muted-foreground">Available for projects throughout India</p>
               </div>
             </div>
           </div>
@@ -82,7 +99,7 @@ export default function ContactPage() {
               For booking inquiries, please include the following information in your message:
             </p>
             <ul className="ml-4 sm:ml-5 md:ml-6 list-disc space-y-1 md:space-y-2 text-xs sm:text-sm md:text-base text-muted-foreground">
-              <li>Type of photography service needed</li>
+              <li>Type of photography/videography service needed</li>
               <li>Preferred date and time</li>
               <li>Location (if known)</li>
               <li>Any special requirements or ideas</li>
@@ -189,11 +206,12 @@ export default function ContactPage() {
               >
                 <option value="">Select a service</option>
                 <option value="portrait">Portrait Session</option>
-                <option value="wedding">Wedding Photography</option>
+                <option value="wedding">Wedding Photography/Videography</option>
                 <option value="commercial">Commercial Project</option>
                 <option value="event">Event Coverage</option>
-                <option value="real-estate">Real Estate Photography</option>
+                <option value="real-estate">Real Estate Photography/Videography</option>
                 <option value="food">Food Photography</option>
+                <option value="other">Other</option>
               </select>
             </div>
             <div className="space-y-1 md:space-y-2">

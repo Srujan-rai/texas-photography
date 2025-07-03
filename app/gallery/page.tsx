@@ -220,54 +220,7 @@ const galleryImages = [
     featured: false,
   },
   // --- NEW IMAGES START HERE ---
-  {
-    id: 25,
-    title: "Joyful Anticipation",
-    category: "Pre-wedding",
-    description: "Couple sharing a laugh during their pre-wedding shoot in a scenic park.",
-    image: "/images/prewedding-park-laugh.png",
-    featured: true,
-  },
-  {
-    id: 26,
-    title: "Sunset Embrace",
-    category: "Pre-wedding",
-    description: "Romantic silhouette of a couple against a vibrant pre-wedding sunset.",
-    image: "/images/prewedding-sunset-silhouette-new.png",
-    featured: false,
-  },
-  {
-    id: 27,
-    title: "Urban Musician",
-    category: "Street Portraits",
-    description: "Capturing the soulful performance of a musician on the city streets.",
-    image: "/images/street-musician-portrait.png",
-    featured: true,
-  },
-  {
-    id: 28,
-    title: "Graffiti Backdrop Portrait",
-    category: "Street Portraits",
-    description: "A candid street portrait with colorful graffiti art in the background.",
-    image: "/images/street-portrait-graffiti.png",
-    featured: false,
-  },
-  {
-    id: 29,
-    title: "The 'Yes!' Moment",
-    category: "Engagements",
-    description: "The raw emotion of a surprise marriage proposal captured.",
-    image: "/images/engagement-proposal-reaction.png",
-    featured: true,
-  },
-  {
-    id: 30,
-    title: "Engagement Ring Detail",
-    category: "Engagements",
-    description: "Close-up artistic shot of the engagement ring.",
-    image: "/images/engagement-ring-detail-shot.png",
-    featured: false,
-  },
+  
 ];
 
 export default function GalleryPage() {

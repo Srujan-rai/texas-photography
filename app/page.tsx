@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Play } from "lucide-react"
+import { ArrowRight, Play, Instagram } from "lucide-react" // Added Instagram icon
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Phone, Mail, MapPin } from "lucide-react"
 
@@ -71,63 +71,63 @@ export default function Home() {
   const portfolioProjects = [
     {
       id: 1,
-      title: "Wedding Stories",
+      title: "Wedding Cinematography",
       category: "Wedding",
-      description: "Capturing the most beautiful moments of your special day",
+      description: "Capturing the most beautiful moments of your special day with cinematic flair.",
       image: "/images/wedding-moment.png",
     },
     {
       id: 2,
-      title: "Portrait Sessions",
+      title: "Portrait Films",
       category: "Portrait",
-      description: "Professional portraits that reveal your authentic self",
+      description: "Dynamic video portraits that reveal your authentic self and narrative.",
       image: "/images/white-dress.png",
     },
     {
       id: 3,
-      title: "Coastal Dreams",
+      title: "Coastal Vistas",
       category: "Landscape",
-      description: "Breathtaking views of coastal landscapes",
+      description: "Breathtaking aerial and ground footage of coastal landscapes.",
       image: "/images/mattu-beach.png",
     },
     {
       id: 4,
-      title: "Culinary Artistry",
+      title: "Culinary Narratives",
       category: "Food",
-      description: "Showcasing dishes in their most appetizing presentation",
+      description: "Showcasing dishes in their most appetizing presentation through motion.",
       image: "/images/food-tiramisu-dome.jpeg",
     },
     {
       id: 5,
-      title: "Gourmet Creations",
+      title: "Gourmet Visuals",
       category: "Food",
-      description: "Elevating food presentation through cinematic photography",
+      description: "Elevating food presentation through cinematic videography.",
       image: "/images/food-gourmet-salad.jpeg",
     },
     {
       id: 6,
-      title: "Cultural Ceremonies",
+      title: "Cultural Documentaries",
       category: "Documentary",
-      description: "Authentic documentation of cultural traditions and ceremonies",
+      description: "Authentic documentation of cultural traditions and ceremonies in motion.",
       image: "/images/haldi-ceremony.png",
     },
     {
       id: 7,
-      title: "Engagement Sessions",
+      title: "Engagement Films",
       category: "Couples",
-      description: "Romantic moments between couples in beautiful settings",
+      description: "Romantic and heartfelt films capturing moments between couples in beautiful settings.",
       image: "/images/beach-couple.png",
     },
     {
       id: 8,
-      title: "Fashion Photography",
+      title: "Fashion Editorials",
       category: "Fashion",
-      description: "Stylish portraits that showcase personality and fashion",
+      description: "Stylish and dynamic video editorials that showcase personality and fashion.",
       image: "/images/umbrella-portrait.png",
     },
   ]
 
-  // Gallery images data
+  // Gallery images data (keeping these as images for variety, but can be adapted for video stills)
   const galleryImages = [
     { id: 9, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/camera-hands.png" },
     { id: 2, aspect: "aspect-[1/1]", span: "md:col-span-1 md:row-span-1", image: "/images/kaif-portrait.png" },
@@ -171,7 +171,7 @@ export default function Home() {
             >
               <div className="relative h-24 w-48 sm:h-32 sm:w-64 md:h-40 md:w-80 overflow-hidden">
                 <Image
-                  src="/images/texas-logo.png"
+                  src="/images/texas-logo.png" // Assuming this is your logo, replace if you have a "Dheeran cinematics" specific logo
                   alt="Dheeran cinematics"
                   fill
                   className="object-contain mix-blend-difference"
@@ -187,7 +187,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="mb-6 sm:mb-8 max-w-xs sm:max-w-md md:max-w-2xl text-sm sm:text-base md:text-lg lg:text-xl font-light text-foreground/80"
           >
-            Capturing the soul of the Lone Star State through cinematic vision
+            Crafting compelling visual narratives through the art of cinematography.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -245,7 +245,7 @@ export default function Home() {
               className="mb-3 sm:mb-4 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight dramatic-text"
             />
             <p className="mx-auto max-w-xs sm:max-w-md md:max-w-3xl text-base sm:text-lg text-muted-foreground">
-              Immerse yourself in the visual stories that define the Texas experience
+              Immerse yourself in the visual stories that define our craft
             </p>
           </FadeIn>
 
@@ -313,7 +313,7 @@ export default function Home() {
             <ParallaxSection speed={0.3} direction="left">
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl shadow-2xl">
                 <Image
-                  src="/images/kaif-portrait.png"
+                  src="/images/kaif-portrait.png" // Replace with an actual portrait of Dheeran if available
                   alt="Cinematographer portrait"
                   width={800}
                   height={1000}
@@ -348,23 +348,23 @@ export default function Home() {
                 <FadeIn delay={0.1}>
                   <p>
                     With over a decade immersed in the art of visual storytelling, I've dedicated my craft to capturing
-                    the essence of Texas through a cinematic perspective. My journey began in the vast landscapes of
-                    West Texas, where the interplay of light and shadow taught me the power of patience and perspective.
+                    the essence of moments through a cinematic perspective. My journey began with a passion for film and
+                    a desire to bring stories to life.
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.2}>
                   <p>
                     Every frame I compose is a deliberate choice to reveal the extraordinary in the ordinary. From the
-                    rugged beauty of Big Bend to the neon-lit streets of Austin, my lens seeks to uncover the authentic
-                    character that makes Texas unlike anywhere else.
+                    vibrant energy of events to the intricate details of products, my lens seeks to uncover the authentic
+                    character that makes each project unique.
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.3}>
                   <p>
                     My approach combines technical precision with artistic intuition, creating visual narratives that
-                    resonate on an emotional level. Whether documenting the quiet dignity of ranch life or the vibrant
-                    energy of urban centers, I strive to create images that transcend mere documentation and become
-                    timeless expressions of place and moment.
+                    resonate on an emotional level. Whether documenting significant life events or crafting compelling
+                    commercials, I strive to create visuals that transcend mere documentation and become
+                    timeless expressions of your vision.
                   </p>
                 </FadeIn>
                 {/* Update the "About the Artist" button to link to the about page */}
@@ -393,7 +393,7 @@ export default function Home() {
               className="mb-3 sm:mb-4 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight dramatic-text"
             />
             <p className="mx-auto max-w-xs sm:max-w-md md:max-w-3xl text-base sm:text-lg text-muted-foreground">
-              A curated collection of cinematic imagery capturing the diverse soul of Texas
+              A curated collection of cinematic imagery and videography that showcases our diverse work.
             </p>
           </FadeIn>
 
@@ -444,7 +444,7 @@ export default function Home() {
         <div className="container relative z-10 px-4 md:px-6">
           <FadeIn className="mb-8 sm:mb-12 text-center">
             <TextReveal
-              text="Cinematography Services"
+              text="Our Cinematography Services"
               className="mb-3 sm:mb-4 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight dramatic-text"
             />
             <p className="mx-auto max-w-xs sm:max-w-md md:max-w-3xl text-base sm:text-lg text-muted-foreground">
@@ -455,45 +455,46 @@ export default function Home() {
           <div className="grid gap-4 sm:gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: "Commercial Cinematography",
+                title: "Commercial & Brand Films",
                 description:
                   "Elevate your brand with stunning visuals that capture your essence and connect with your audience.",
                 icon: "🎬",
               },
               {
-                title: "Documentary Projects",
+                title: "Documentary Filmmaking",
                 description:
                   "Authentic storytelling that preserves moments and narratives with depth and artistic integrity.",
                 icon: "📽️",
               },
               {
-                title: "Aerial Photography",
+                title: "Aerial Cinematography",
                 description:
                   "Breathtaking perspectives from above, revealing landscapes and structures in their full glory.",
                 icon: "🚁",
               },
               {
-                title: "Event Coverage",
+                title: "Event Videography",
                 description:
                   "Cinematic documentation of special occasions, from intimate gatherings to grand celebrations.",
                 icon: "🎭",
               },
               {
-                title: "Fine Art Photography",
+                title: "Wedding Films",
                 description:
-                  "Museum-quality prints that transform spaces and evoke emotion through visual storytelling.",
-                icon: "🖼️",
+                  "Crafting timeless and emotional wedding films that capture the magic of your special day.",
+                icon: "💍",
               },
               {
-                title: "Creative Direction",
-                description: "Comprehensive visual strategy and artistic guidance for brands and creative projects.",
-                icon: "🎨",
-              },
-              {
-                title: "Food Photography",
+                title: "Food & Product Videos",
                 description:
-                  "Capturing culinary artistry with precision and style that makes dishes look as delicious as they taste.",
+                  "Capturing culinary artistry and product details with precision and style that makes them visually irresistible.",
                 icon: "🍽️",
+              },
+              {
+                title: "Music Videos",
+                description:
+                  "Dynamic and creative music videos that bring your artistic vision to life through compelling visuals.",
+                icon: "🎤",
               },
             ].map((service, index) => (
               <FadeIn key={index} delay={index * 0.1} direction="up">
@@ -543,8 +544,8 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-medium">Phone</h3>
-                  <p className="text-muted-foreground">(512) 555-0123</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground/70">Available Monday-Friday, 9am-5pm CST</p>
+                  <p className="text-muted-foreground">+91 77601 32092</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground/70">Available Monday-Sunday, 9am-8pm IST</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
@@ -553,8 +554,27 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-medium">Email</h3>
-                  <p className="text-muted-foreground">contact@texascinematography.com</p>
+                  <p className="text-muted-foreground">dmashlesh@gmail.com</p>
                   <p className="text-xs sm:text-sm text-muted-foreground/70">We'll respond within 24 hours</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="rounded-full bg-foreground/10 p-2 sm:p-3">
+                  <Instagram className="h-4 w-4 sm:h-5 sm:w-5" /> {/* Added Instagram icon */}
+                </div>
+                <div>
+                  <h3 className="font-medium">Instagram</h3>
+                  <p className="text-muted-foreground">
+                    <a
+                      href="https://www.instagram.com/dheeran_cinematics?igsh=NzcwYjJ3YjhvZTFj"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:no-underline"
+                    >
+                      @dheeran_cinematics
+                    </a>
+                  </p>
+                  <p className="text-xs sm:text-sm text-muted-foreground/70">Connect with us for daily updates!</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
@@ -563,9 +583,9 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-medium">Location</h3>
-                  <p className="text-muted-foreground">Austin, Texas</p>
+                  <p className="text-muted-foreground">Bengaluru, Karnataka, India</p>
                   <p className="text-xs sm:text-sm text-muted-foreground/70">
-                    Available for travel throughout Texas and beyond
+                    Available for travel throughout India and beyond
                   </p>
                 </div>
               </div>
@@ -574,10 +594,16 @@ export default function Home() {
             <div className="mt-8 sm:mt-12">
               <h3 className="mb-3 sm:mb-4 font-serif text-lg sm:text-xl font-bold">Follow Our Visual Journey</h3>
               <div className="flex flex-wrap gap-2 sm:gap-4">
-                {["Instagram", "Vimeo", "YouTube", "Behance"].map((platform, index) => (
+                {["Instagram", "Vimeo", "YouTube", "Behance", "LinkedIn"].map((platform, index) => (
                   <motion.a
                     key={index}
-                    href="#"
+                    href={
+                      platform === "Instagram"
+                        ? "https://www.instagram.com/dheeran_cinematics?igsh=NzcwYjJ3YjhvZTFj"
+                        : "#" // Replace with actual links for other platforms
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ y: -5 }}
                     className="rounded-full border border-foreground/20 bg-foreground/5 px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm backdrop-blur-sm transition-colors hover:bg-foreground/10 shadow-md cinematic-hover"
                   >
@@ -604,6 +630,7 @@ export default function Home() {
                   </label>
                   <input
                     id="first-name"
+                    name="first-name" // Added name attribute
                     className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
                     placeholder="John"
                     required
@@ -615,6 +642,7 @@ export default function Home() {
                   </label>
                   <input
                     id="last-name"
+                    name="last-name" // Added name attribute
                     className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
                     placeholder="Doe"
                     required
@@ -627,10 +655,23 @@ export default function Home() {
                 </label>
                 <input
                   id="email"
+                  name="email" // Added name attribute
                   type="email"
                   className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
                   placeholder="john.doe@example.com"
                   required
+                />
+              </div>
+              <div className="space-y-1 sm:space-y-2">
+                <label htmlFor="phone" className="text-xs sm:text-sm font-medium">
+                  Phone (Optional)
+                </label>
+                <input
+                  id="phone"
+                  name="phone" // Added name attribute
+                  type="tel"
+                  className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
+                  placeholder="77601 32092" // Updated placeholder
                 />
               </div>
               <div className="space-y-1 sm:space-y-2">
@@ -639,6 +680,7 @@ export default function Home() {
                 </label>
                 <select
                   id="project-type"
+                  name="project-type" // Added name attribute
                   className="w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
                   required
                 >
@@ -646,19 +688,25 @@ export default function Home() {
                     Select project type
                   </option>
                   <option value="commercial" className="bg-background">
-                    Commercial
+                    Commercial & Brand Film
                   </option>
                   <option value="documentary" className="bg-background">
-                    Documentary
+                    Documentary Filmmaking
                   </option>
                   <option value="event" className="bg-background">
-                    Event Coverage
+                    Event Videography
                   </option>
                   <option value="aerial" className="bg-background">
-                    Aerial Photography
+                    Aerial Cinematography
                   </option>
-                  <option value="fine-art" className="bg-background">
-                    Fine Art
+                  <option value="wedding" className="bg-background">
+                    Wedding Film
+                  </option>
+                  <option value="food-product" className="bg-background">
+                    Food & Product Video
+                  </option>
+                  <option value="music-video" className="bg-background">
+                    Music Video
                   </option>
                   <option value="other" className="bg-background">
                     Other
@@ -671,6 +719,7 @@ export default function Home() {
                 </label>
                 <textarea
                   id="message"
+                  name="message" // Added name attribute
                   className="h-24 sm:h-32 w-full rounded-md border border-foreground/10 bg-foreground/5 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-foreground placeholder-foreground/50 backdrop-blur-sm transition-colors focus:border-foreground/20 focus:outline-none focus:ring-0"
                   placeholder="Tell us about your vision..."
                   required
@@ -699,7 +748,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-sm sm:text-base text-muted-foreground">
-                Capturing the soul of the Lone Star State through cinematic vision.
+                Crafting compelling visual narratives through the art of cinematography.
               </p>
             </div>
             <div>
@@ -726,15 +775,16 @@ export default function Home() {
             </div>
             <div>
               <h3 className="mb-3 sm:mb-4 font-serif text-base sm:text-lg font-bold">Services</h3>
-              {/* Update the services footer links */}
+              {/* Updated services footer links to match the new service titles */}
               <ul className="space-y-2 sm:space-y-3">
                 {[
-                  { name: "Commercial", href: "/services#commercial" },
-                  { name: "Documentary", href: "/services#documentary" },
-                  { name: "Aerial", href: "/services#aerial" },
-                  { name: "Events", href: "/services#events" },
-                  { name: "Portrait", href: "/services#portrait" },
-                  { name: "Wedding", href: "/services#wedding" },
+                  { name: "Commercial & Brand Films", href: "/services#commercial" },
+                  { name: "Documentary Filmmaking", href: "/services#documentary" },
+                  { name: "Aerial Cinematography", href: "/services#aerial" },
+                  { name: "Event Videography", href: "/services#events" },
+                  { name: "Wedding Films", href: "/services#wedding" },
+                  { name: "Food & Product Videos", href: "/services#food-product" },
+                  { name: "Music Videos", href: "/services#music-video" },
                 ].map((item, index) => (
                   <li key={index}>
                     <Link
@@ -750,13 +800,21 @@ export default function Home() {
             <div>
               <h3 className="mb-3 sm:mb-4 font-serif text-base sm:text-lg font-bold">Connect</h3>
               <ul className="space-y-2 sm:space-y-3">
-                {["Instagram", "Vimeo", "YouTube", "Behance", "LinkedIn"].map((item, index) => (
+                {[
+                  { name: "Instagram", href: "https://www.instagram.com/dheeran_cinematics?igsh=NzcwYjJ3YjhvZTFj" },
+                  { name: "Vimeo", href: "#" }, // Replace with actual Vimeo link
+                  { name: "YouTube", href: "#" }, // Replace with actual YouTube link
+                  { name: "Behance", href: "#" }, // Replace with actual Behance link
+                  { name: "LinkedIn", href: "#" }, // Replace with actual LinkedIn link
+                ].map((item, index) => (
                   <li key={index}>
                     <Link
-                      href="#"
+                      href={item.href}
+                      target="_blank" // Open in new tab
+                      rel="noopener noreferrer"
                       className="text-sm sm:text-base text-muted-foreground transition-colors hover:text-foreground animated-underline"
                     >
-                      {item}
+                      {item.name}
                     </Link>
                   </li>
                 ))}
