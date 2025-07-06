@@ -15,6 +15,13 @@ export async function submitContactForm(formData: FormData) {
   if (!firstName || !lastName || !email || !service || !message) {
     return { success: false, message: "Please fill in all required fields." }
   }
+  console.log("EMAIL ENV VARS:", {
+    EMAIL_HOST: process.env.EMAIL_HOST,
+    EMAIL_PORT: process.env.EMAIL_PORT,
+    EMAIL_SECURE: process.env.EMAIL_SECURE,
+    EMAIL_USER: process.env.EMAIL_USER,
+    EMAIL_PASS_EXISTS: !!process.env.EMAIL_PASS, // don't log password directly
+  })
 
   // Configure your email transporter
   // You'll need to replace these with your actual email service details
@@ -26,13 +33,15 @@ export async function submitContactForm(formData: FormData) {
       user: process.env.EMAIL_USER, // Your email address
       pass: process.env.EMAIL_PASS, // Your email password or app-specific password
     },
+    
   })
 
   try {
     // Send email to yourself (the predefined mail ID)
+
     await transporter.sendMail({
       from: process.env.EMAIL_USER, // Sender address (can be the same as EMAIL_USER)
-      to: "dmashlesh@gmail.com", // Your predefined email address to receive messages
+      to: "dheerancinematics@gmail.com", 
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>
